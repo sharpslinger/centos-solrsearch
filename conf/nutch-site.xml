@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>http.agent.name</name>
+        <value>Intouch Crawler</value>
+    </property>
+    <property>
+    <name>solr.server.type</name>
+    <value>http</value>
+    <description>
+        Specifies the SolrServer implementation to use. This is a string value
+        of one of the following 'cloud', 'concurrent', 'http' or 'lb'.
+        The values represent CloudSolrServer, ConcurrentUpdateSolrServer, 
+        HttpSolrServer or LBHttpSolrServer respectively.
+    </description>
+    </property>
+
+    <property>
+    <name>solr.server.url</name>
+    <value>http://127.0.0.1:8983/solr/</value>
+    <description>
+        Defines the Solr URL into which data should be indexed using the
+        indexer-solr plugin.
+    </description>
+    </property>
+
+    <property>
+    <name>solr.zookeeper.url</name>
+    <value></value>
+    <description>
+        Defines the Zookeeper URL which is an essential setting to be used 
+        when using SolrCloud. This should be a fully qualified URL similar to
+        the property provided within 'solr.server.url' above.
+    </description>
+    </property>
+
+    <property>
+    <name>solr.loadbalance.urls</name>
+    <value></value>
+    <description>
+        A comma-separated value representing the Solr servers to be used when
+        initiating LBHttpSolrServer as the SolrServer implementation. 
+    </description>
+    </property>
+
+    <property>
+    <name>solr.mapping.file</name>
+    <value>solrindex-mapping.xml</value>
+    <description>
+    Defines the name of the file that will be used in the mapping of internal
+    Nutch field names to solr index fields as specified in the target Solr schema.
+    </description>
+    </property>
+
+    <property> 
+    <name>solr.commit.size</name>
+    <value>250</value>
+    <description>
+    Defines the number of documents to send to Solr in a single update batch.
+    Decrease when handling very large documents to prevent Nutch from running
+    out of memory. NOTE: It does not explicitly trigger a server side commit.
+    </description>
+    </property>
+
+    <property>
+    <name>solr.commit.index</name>
+    <value>true</value>
+    <description>
+    When closing the indexer, trigger a commit to the Solr server. 
+    </description>
+    </property>
+
+    <property>
+    <name>solr.auth</name>
+    <value>false</value>
+    <description>
+    Whether to enable HTTP basic authentication for communicating with Solr.
+    Use the solr.auth.username and solr.auth.password properties to configure
+    your credentials.
+    </description>
+    </property>
+
+    <property>
+  <name>db.fetch.interval.default</name>
+  <value>30</value>
+  <description>The default number of seconds between re-fetches of a page (30 days).
+  </description>
+</property>
+</configuration>
