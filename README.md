@@ -14,10 +14,12 @@ Mount a folder containing setup files at /mnt/install #
     chmod +x crawlsites.sh
     ./setup.sh
 
-add JAVA_HOME to point to /usr/lib/jvm/java-1.8.0.../jre
-add solr to hosts with echo "127.0.0.1   solr" >> /etc/hosts
+Ensure JAVA_HOME points to a valid JRE:
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0.../jre
+    
+Add solr to hosts with echo "127.0.0.1   solr" >> /etc/hosts
 
-set the retry interval (db.fetch.interval.default) by adding the following to nutch-site.xml as a number of seconds.  nutch won't re-fetch a url before that time expires.  Default: 30 days
+Set the retry interval (db.fetch.interval.default) by adding the following to nutch-site.xml as a number of seconds.  Nutch won't re-fetch a url before that time expires.  Default if this isn't set: 30 days
 
     <property>
       <name>db.fetch.interval.default</name>
