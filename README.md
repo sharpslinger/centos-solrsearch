@@ -6,23 +6,15 @@ Setup a CentOS VM or machine.  Install prerequisites for file sharing:
     yum install samba samba-client cifs-utils -y
 
 ### Installing files and tools
-Mount a folder containing setup files at /mnt/install #
-
-    mkdir /mnt/install_files
-    cp -r /mnt/install* /mnt/install_files
-    cd /mnt/install_files
-    chmod +x setup.sh
-    chmod +x crawlsites.sh
-    ./setup.sh
-
-Alternatively, archive these files and SCP them to the target machine
+After pulling the git repo, gzip these files and SCP them to the target machine
     git archive -o searchfiles.tar.gz --format=tar.gz
+(git archive omits the .git folder)
     scp searchfiles.tar.gz name@SERVER_NAME_OR_IP:/mnt/install_files/
     ssh name@SERVER_NAME_OR_IP
     $> cd /mnt/install_files
     $> tar -xzf searchfiles.tar.gz
-    $> chmod +x setup.sh
-    $> chmod +x crawlsites.sh
+    $> chmod +x setup.sh && chmod +x crawlsites.sh
+    $> ./setup.sh
 
 ### Customization / Troubleshooting
 Ensure JAVA_HOME points to a valid JRE if a separate JDK/JRE was installed.  The following has been set in /etc/profile:
@@ -31,7 +23,9 @@ Ensure JAVA_HOME points to a valid JRE if a separate JDK/JRE was installed.  The
 Ensure hosts entry exists; the following was run during setup:
     echo "127.0.0.1   solr" >> /etc/hosts
 
-Set the retry interval (db.fetch.interval.default) by adding the following to /opt/nutch/conf/nutch-site.xml as a number of seconds.  Nutch won't re-fetch a url before that time expires.  By default, Nutch sets this to 30 days.  This setup script drops it to 30 seconds for testing purposes.  Below is an example of a setting for 1 day.
+Set the retry interval (db.fetch.interval.default) by adding the following to /opt/nutch/conf/nutch-site.xml as a number of seconds.  Nutch won't re-fetch a url before that time expires.  By default, Nutch sets this to 30 days.  This setup script sets it to 30 seconds.
+
+You may want to configure a longer interval depending on expected content updates.  Below is an example of a setting for 1 day.
 
     <property>
       <name>db.fetch.interval.default</name>
